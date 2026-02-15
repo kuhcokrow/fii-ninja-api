@@ -77,14 +77,14 @@ export const getLiquidity = async (
 }
 
 export const getAnalytics = async (
-  req: FastifyRequest<{ Params: { id: string } }>,
+  req: FastifyRequest<{ Params: { marketId: string } }>,
   res: FastifyReply
 ) => {
   try {
-    const { id } = req.params;
+    const { marketId } = req.params;
 
-    const summary = await marketService.fetchMarketSummary(id);
-    const liquidity = await marketService.fetchLiquidity(id);
+    const summary = await marketService.fetchMarketSummary(marketId);
+    const liquidity = await marketService.fetchLiquidity(marketId);
 
     const analytics = {
       summary,
@@ -92,7 +92,7 @@ export const getAnalytics = async (
     };
 
     return res.status(200).send({
-      marketId: id,
+      marketId,
       analytics,
       timestamp: Date.now()
     });

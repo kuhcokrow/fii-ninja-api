@@ -4,7 +4,11 @@ import marketRoutes from './routes/market.route'
 
 export async function build() {
   const app = Fastify({
-    logger: true,
+    logger: {
+      transport: {
+        target: 'pino-pretty'
+      }
+    },
   })
 
   await app.register(cors)

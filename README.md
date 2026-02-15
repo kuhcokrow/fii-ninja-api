@@ -54,6 +54,8 @@ GET /markets?page=1&limit=10
 **Query Parameters:**
 - `page` (number, optional): Page number. Default: 1
 - `limit` (number, optional): Results per page. Default: 10
+- `status` (string, optional): Filter by market status. 
+- `ticker` (string, optional): Filter by ticker symbol. Example: `INJ`
 
 **Response Example:**
 ```json
@@ -215,7 +217,7 @@ Complete market analysis combining summary, liquidity, and volatility metrics.
 
 **Endpoint:**
 ```
-GET /markets/:marketId/analysis
+GET /markets/:marketId/analytics
 ```
 
 **Response Example:**
@@ -303,7 +305,7 @@ All data is directly sourced from Injective's on-chain DEX infrastructure.
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 16+ 
+- Node.js 18+ 
 - pnpm (or npm/yarn)
 
 ### Installation
@@ -362,7 +364,7 @@ All data is directly sourced from Injective's on-chain DEX infrastructure.
 ## 🛠️ Technology Stack
 
 - **Runtime**: Node.js / TypeScript
-- **Framework**: Express.js
+- **Framework**: Fastify
 - **Data Source**: Injective Protocol
 - **Language**: TypeScript
 - **Package Manager**: pnpm
@@ -381,41 +383,14 @@ FII follows these design principles:
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
-## 📝 License
-
-This project is open source and available under the MIT License.
-
----
-
-## 📧 Contact & Support
-
-For questions or issues:
-- 📬 Open an issue on GitHub
-- 🐦 Follow us on X (Twitter) for updates
-- 💬 Join our community discussions
-
----
-
 ## 🏆 Hackathon Submission
 
-**Hackathon**: Ninja Forge API (28/1/2026 - 15/2/2026)
-**Project Name**: Forge Injective Insights
-**Category**: Data Aggregation & Computation APIs
-**Focus**: Market analytics, liquidity metrics, volatility analysis
+**Hackathon**: Ninja Forge API (28/1/2026 - 15/2/2026)  
+**Project Name**: Forge Injective Insights  
+**Category**: Data Aggregation & Computation APIs  
+**Focus**: Market analytics, liquidity metrics, volatility analysis  
 
-This project demonstrates the power of intelligent API design for the Injective ecosystem, providing developers with meaningful, processed market data rather than raw information.
+This project demonstrates the power of thoughtful API design for the Injective ecosystem, providing developers with meaningful, processed market data rather than raw information.
 
 ---
 

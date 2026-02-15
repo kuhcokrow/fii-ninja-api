@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import * as marketService from '../services/market.service' 
+import { addSnapshot, calculateVolatility } from '../utils/volatility'
 
 export const getAllMarkets = async (
   req: FastifyRequest,
@@ -86,15 +87,32 @@ export const getAnalytics = async (
     const summary = await marketService.fetchMarketSummary(marketId);
     const liquidity = await marketService.fetchLiquidity(marketId);
 
-    const analytics = {
-      summary,
-      liquidity
-    };
+    addSnapshot(marketId, {
+      midPrice: (summary.topBid + summary.topAsk) / 2,
+      spread: summary.spread ?? 0,
+      totalDepth: liquidity.totalDepth
+    });
 
-    return res.status(200).send({
+    const volatility = calculateVolatility(marketId);
+
+    return res.send({
       marketId,
-      analytics,
-      timestamp: Date.now()
+      spread : summary.spread ?? liquidity.spread,
+      summary: {
+        ticker: summary.ticker,
+        marketStatus: summary.marketStatus,
+        topBid: summary.topBid,
+        topAsk: summary.topAsk,
+      },
+      liquidity: {
+        totalBidDepth: liquidity.totalBidDepth,
+        totalAskDepth: liquidity.totalAskDepth,
+        totalDepth: liquidity.totalDepth,
+        midPrice: liquidity.midPrice,
+        imbalance: liquidity.imbalance,
+        liquidityScore: liquidity.liquidityScore
+      },
+      volatility
     });
   } catch (error) {
     return res.status(500).send({
